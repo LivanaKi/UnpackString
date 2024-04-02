@@ -1,41 +1,41 @@
 package unpackstring
 
 import (
-	"errors"
 	"strconv"
 	"strings"
 	"unicode"
+	"errors"
 )
 
-var ErrInvalidString = errors.New("invalid string")
+var ErrInvalidString = errors.New("Number it isn't ok")
 
-func Unpack(start string) (string, error) {
+func Unpack(s string) (string, error){
 
-	var result strings.Builder
-
-	if len(start) == 0 {
+	var res strings.Builder
+	
+	if len(s) == 0{
 		return "", nil
 	}
-	for i, solution := range start {
-		if unicode.IsNumber(rune(start[0])) {
-			return "", ErrInvalidString
-		}
-		if unicode.IsDigit(solution) {
-			num, _ := strconv.Atoi(string(start[i]))
-			if num == 1 && unicode.IsDigit(rune(start[i+1])) {
-				num1, _ := strconv.Atoi(string(start[i+1]))
-				if num1 == 0 {
-					return "", ErrInvalidString
-				}
-			}
+
+	if unicode.IsNumber(rune(s[0])){
+		return "",ErrInvalidString
+	}else{
+		res.WriteString(string(s[0]))
+	}
+
+	for i := 1; i < len(s); i++{
+		if unicode.IsLetter(rune(s[i])){
+			res.WriteString(string(s[i]))
+		}else{
+			var current string
+			num, _ := strconv.Atoi(string(s[i]))
 			if num == 0 {
 				return "", ErrInvalidString
 			}
-			result.WriteString(strings.Repeat(string(start[i-1]), num-1))
-		}
-		if unicode.IsLetter(solution) {
-			result.WriteRune(solution)
+			current = strings.Repeat(string(s[i-1]), num - 1)
+
+			res.WriteString(current)
 		}
 	}
-	return result.String(), nil
+	return res.String(), nil
 }

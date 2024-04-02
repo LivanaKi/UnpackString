@@ -25,12 +25,12 @@ func TestUnpack(t *testing.T) {
 		{
 			input:    "45",
 			expected: "",
-			err:      ErrInvalidString,
+			err: ErrInvalidString,
 		},
 		{
 			input:    "aaa10b",
 			expected: "",
-			err:      ErrInvalidString,
+			err: ErrInvalidString,
 		},
 		{
 			input:    "",
@@ -39,12 +39,12 @@ func TestUnpack(t *testing.T) {
 		{
 			input:    "a2o3f0",
 			expected: "",
-			err:      ErrInvalidString,
+			err: ErrInvalidString,
 		},
 		{
 			input:    "a2c000",
 			expected: "",
-			err:      ErrInvalidString,
+			err: ErrInvalidString,
 		},
 	} {
 		t.Run(tst.input, func(t *testing.T) {
